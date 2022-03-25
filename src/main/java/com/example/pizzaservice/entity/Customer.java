@@ -15,6 +15,8 @@ public class Customer {
     private String lastName;
     private String address;
     private String phoneNumber; //TODO
+    private String email;
+    private Boolean registered;
 
     public Long getId() {
         return id;
