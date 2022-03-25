@@ -10,14 +10,56 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @Column(name = "PIZZA_NAME")
     private String pizzaName;
-    private Integer diameter;
-    //??
+    @Column(name = "PIZZA_DIAMETER")
+    private Diameter diameter;
     @ElementCollection
-    private List<String> ingredients; //TODO
+    @Column(name = "PIZZA_INGRIDIENTS")
+    private List<Ingredients> ingredients;
+    @Column(name = "PIZZA_WEIGHT")
     private Integer weight;
-    private String doughType; //TODO
+    @Column(name = "PIZZA_DOUGH_TYPE")
+    private DoughType doughType;
+    @Column(name = "PIZZA_PRICE")
     private Integer price;
+
+    public enum Diameter {
+        SMALL(25),
+        MEDIUM(30),
+        LARGE(35);
+
+        private final int value;
+
+        Diameter(final int newValue){
+            value = newValue;
+        }
+
+        public int getValue(){
+            return value;
+        }
+    }
+
+    public enum Ingredients{
+        MOZZARELLA,
+        CHEDDAR,
+        BLUE_CHEESE,
+        CHICKEN,
+        BEEF,
+        SAUSAGE,
+        CHORIZO,
+        MUSHROOM,
+        ONION,
+        PICKLES,
+        OLIVES
+    }
+
+    public enum DoughType{
+        THIN,
+        THICK,
+        HOTDOG,
+        CHEESY
+    }
 
     public Long getId() {
         return id;
