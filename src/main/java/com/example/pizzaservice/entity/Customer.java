@@ -13,9 +13,13 @@ public class Customer {
     private String firstName;
     @Column(name = "CUSTOMER_LAST_NAME")
     private String lastName;
+    @Column(name = "CUSTOMER_ADDRESS")
     private String address;
+    @Column(name = "CUSTOMER_PHONE_NUMBER")
     private String phoneNumber; //TODO
+    @Column(name = "CUSTOMER_EMAIL")
     private String email;
+    @Column(name = "CUSTOMER_REGISTERED")
     private Boolean registered;
 
     public Long getId() {
