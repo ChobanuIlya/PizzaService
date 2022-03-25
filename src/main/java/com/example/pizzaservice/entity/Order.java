@@ -29,4 +29,24 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Pizza> getPizzaList() {
+        return pizzaList;
+    }
+
+    public void setPizzaList(List<Pizza> pizzaList) {
+        this.pizzaList = pizzaList;
+    }
+
+    public Integer getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(Integer orderPrice) {
+        this.orderPrice = orderPrice;
+    }
 }

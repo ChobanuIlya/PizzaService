@@ -68,4 +68,52 @@ public class Pizza {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getPizzaName() {
+        return pizzaName;
+    }
+
+    public void setPizzaName(String pizzaName) {
+        this.pizzaName = pizzaName;
+    }
+
+    public Diameter getDiameter() {
+        return diameter;
+    }
+
+    public void setDiameter(Diameter diameter) {
+        this.diameter = diameter;
+    }
+
+    public List<Ingredients> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredients> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public DoughType getDoughType() {
+        return doughType;
+    }
+
+    public void setDoughType(DoughType doughType) {
+        this.doughType = doughType;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 }
