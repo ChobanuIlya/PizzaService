@@ -51,7 +51,9 @@ public class Pizza {
         MUSHROOM,
         ONION,
         PICKLES,
-        OLIVES
+        OLIVES,
+        WHITE_SAUCE,
+        TOMATO_SAUCE
     }
 
     public enum DoughType{
@@ -59,6 +61,14 @@ public class Pizza {
         THICK,
         HOTDOG,
         CHEESY
+    }
+
+    public enum PizzaDefault{
+        MARGARITA,
+        FOUR_CHEESE,
+        VILLAGER,
+        SUPER_MEAT,
+        DIABLO
     }
 
     public Long getId() {

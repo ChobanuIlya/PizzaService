@@ -13,14 +13,15 @@ public class Customer {
     private String firstName;
     @Column(name = "CUSTOMER_LAST_NAME")
     private String lastName;
+    @Column(name = "CUSTOMER_PASSWORD")
+    private String password;
     @Column(name = "CUSTOMER_ADDRESS")
     private String address;
     @Column(name = "CUSTOMER_PHONE_NUMBER")
     private String phoneNumber; //TODO
     @Column(name = "CUSTOMER_EMAIL")
     private String email;
-    @Column(name = "CUSTOMER_REGISTERED")
-    private Boolean registered;
+
 
     public Long getId() {
         return id;
@@ -44,6 +45,14 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getAddress() {
@@ -70,11 +79,4 @@ public class Customer {
         this.email = email;
     }
 
-    public Boolean getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(Boolean registered) {
-        this.registered = registered;
-    }
 }
