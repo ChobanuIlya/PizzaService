@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "PIZZAS")
 @AttributeOverride(name = "id", column = @Column(name = "pizza_id"))
 public class Pizza {
     @Id

@@ -1,8 +1,10 @@
 package com.example.pizzaservice.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "CUSTOMERS")
 @AttributeOverride(name = "id", column = @Column(name = "customer_id"))
 public class Customer {
     @Id
@@ -21,6 +23,8 @@ public class Customer {
     private String phoneNumber; //TODO
     @Column(name = "CUSTOMER_EMAIL")
     private String email;
+    @OneToMany
+    private List<Order> order;
 
 
     public Long getId() {
