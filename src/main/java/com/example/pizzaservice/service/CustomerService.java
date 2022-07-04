@@ -1,15 +1,20 @@
 package com.example.pizzaservice.service;
 
 import com.example.pizzaservice.entity.Customer;
-import com.example.pizzaservice.exception.InvalidEmailException;
-import com.example.pizzaservice.exception.InvalidPhoneNumberException;
+import com.example.pizzaservice.entity.Order;
 import com.example.pizzaservice.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CustomerService {
@@ -20,45 +25,38 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer newCustomer(Customer customer) throws RuntimeException {
-        if (isPhoneNumberTaken(customer)) {
-            throw new InvalidPhoneNumberException("This phone number is already taken!");
+    public Customer newCustomer(String phoneNumber, String password, String firstName, String lastName,
+                                String address, String email, Date bday, Map<String, Object> model){
+        Customer customerFromDb = customerRepository.findCustomerByPhoneNumber(phoneNumber);
+        if (customerFromDb != null) {
+            model.put("message", "Customer exists!");
         }
-        if (isEmailTaken(customer)) {
-            throw new InvalidEmailException("This email is already taken!");
-        }
-        return customerRepository.save(customer);
+        Customer customer = new Customer();
+        List<Order> orders = new ArrayList<>();
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
+        customer.setPassword(passwordEncoder.encode(password));
+        customer.setPhoneNumber(phoneNumber);
+        customer.setAddress(address);
+        customer.setEmail(email);
+        customer.setBirthday(bday);
+        customer.setOrder(orders);
+        customerRepository.save(customer);
+        return customerFromDb;
     }
 
-    public void login(Customer customer, HttpServletRequest request, HttpServletResponse response) {
-        if (isPhoneNumberTaken(customer)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("first_name", customer.getFirstName());
-            session.setAttribute("phone_number", customer.getPhoneNumber());
-        }
-    }
-
-    public List<Customer> findAllCustomers() {
-        return customerRepository.findAll();
-    }
-
-    public boolean isPhoneNumberTaken(Customer customer) {
-        List<Customer> list = findAllCustomers();
-        for (Customer customer1 : list) {
-            if (customer1.getPhoneNumber().equals(customer.getPhoneNumber())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isEmailTaken(Customer customer) {
-        List<Customer> list = findAllCustomers();
-        for (Customer customer1 : list) {
-            if (customer1.getEmail().equals(customer.getEmail())) {
-                return true;
-            }
-        }
-        return false;
+    public void updateCustomer(String password, String firstName, String lastName,
+                               String address, String email, Authentication authentication){
+        customerRepository.findById(customerRepository.findCustomerByPhoneNumber(authentication.getName()).getId())
+                .map(entity -> {
+                    entity.setFirstName(firstName);
+                    entity.setLastName(lastName);
+                    entity.setAddress(address);
+                    entity.setEmail(email);
+                    if (!password.isEmpty()) {
+                        entity.setPassword(passwordEncoder.encode(password));
+                    }
+                    return customerRepository.save(entity);
+                });
     }
 }
