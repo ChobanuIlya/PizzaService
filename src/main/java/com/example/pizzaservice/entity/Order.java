@@ -19,6 +19,16 @@ public class Order {
     @Column(name = "ORDER_PRICE")
     private Integer orderPrice;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", pizzaList=" + pizzaList +
+                ", orderPrice=" + orderPrice +
+                '}';
+    }
+
     public Customer getCustomer() {
         return customer;
     }

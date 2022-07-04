@@ -2,6 +2,7 @@ package com.example.pizzaservice.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "PIZZAS")
@@ -16,7 +17,7 @@ public class Pizza {
     @Column(name = "PIZZA_DIAMETER")
     private Diameter diameter;
     @ElementCollection
-    @Column(name = "PIZZA_INGRIDIENTS")
+    @Column(name = "PIZZA_INGREDIENTS")
     private List<Ingredients> ingredients;
     @Column(name = "PIZZA_WEIGHT")
     private Integer weight;
@@ -24,6 +25,9 @@ public class Pizza {
     private DoughType doughType;
     @Column(name = "PIZZA_PRICE")
     private Integer price;
+
+    public Pizza() {
+    }
 
     public enum Diameter {
         SMALL(25),
@@ -47,12 +51,14 @@ public class Pizza {
         BLUE_CHEESE,
         CHICKEN,
         BEEF,
+        SHRIMP,
         SAUSAGE,
         CHORIZO,
         MUSHROOM,
         ONION,
         PICKLES,
         OLIVES,
+        TOMATOES,
         WHITE_SAUCE,
         TOMATO_SAUCE
     }
@@ -66,10 +72,41 @@ public class Pizza {
 
     public enum PizzaDefault{
         MARGARITA,
-        FOUR_CHEESE,
+        THREE_CHEESE,
         VILLAGER,
         SUPER_MEAT,
-        DIABLO
+        DIABLO,
+        SEAFARER
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "id=" + id +
+                ", pizzaName='" + pizzaName + '\'' +
+                ", diameter=" + diameter +
+                ", ingredients=" + ingredients +
+                ", weight=" + weight +
+                ", doughType=" + doughType +
+                ", price=" + price +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pizza pizza = (Pizza) o;
+        return Objects.equals(pizzaName, pizza.pizzaName) && Objects.equals(price, pizza.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pizzaName, price);
+    }
+
+    public int setHashcode(Pizza pizza){
+        return Objects.hash(pizza);
     }
 
     public Long getId() {

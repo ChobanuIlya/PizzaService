@@ -1,6 +1,7 @@
 package com.example.pizzaservice.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,12 +21,31 @@ public class Customer {
     @Column(name = "CUSTOMER_ADDRESS")
     private String address;
     @Column(name = "CUSTOMER_PHONE_NUMBER")
-    private String phoneNumber; //TODO
+    private String phoneNumber;
     @Column(name = "CUSTOMER_EMAIL")
     private String email;
+    @Column(name = "CUSTOMER_BDAY")
+    private Date birthday;
     @OneToMany
     private List<Order> order;
 
+    public Customer() {
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", order=" + order +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -83,4 +103,19 @@ public class Customer {
         this.email = email;
     }
 
+    public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 }
