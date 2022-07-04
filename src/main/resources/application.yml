@@ -13,10 +13,9 @@ spring:
     open-in-view: false
     generate-ddl: true
 server:
-  port: 8807
+  port: 8080
 springdoc:
     swagger-ui:
       path: /swagger-ui.html
     api-docs:
       path: /api-docs.yaml
-
